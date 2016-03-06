@@ -10,24 +10,38 @@ public class Notebook {
     int lastNoteID = -1;
 
 
-    public void addNote(Note note) {     //добавляет новую запись в Блокнот
-        notes [lastNoteID+1] = note;
-        lastNoteID = lastNoteID +1;
+    public void addNote(Note note) {    //добавляет новую запись в Блокнот
+        if (lastNoteID < notes.length) {
+            notes[lastNoteID + 1] = note;
+            lastNoteID = lastNoteID + 1;
+        } else
+            System.out.println("Память заполнена. Удалите ненужные записи.");
     }
 
     public void deleteNote (int id) {    //удаляет ранее созданную запись из Блокнота
-        for (int i=id; i < lastNoteID; i++) {
-            notes [i] = notes [i + 1];
-        }
-        lastNoteID = lastNoteID - 1;
+        if (id >=0 & id<= notes.length) {
+            for (int i=id; i < lastNoteID; i++) {
+                notes [i] = notes [i + 1];
+            }
+            lastNoteID = lastNoteID - 1;
+        } else
+            System.out.println("Невозможно удалить несуществующую запись.");
     }
 
-    public Note getNote(int id) {       //возвращает запись по ее id
-        return notes[id];
+    public Note getNote(int id) {               //возвращает запись по ее id
+        if (id >=0 & id <= notes.length) {
+            return notes[id];
+        } else
+        return null;
     }
+
 
     public void editNote (int id, Note note) {    //изменяет созданную запись
-        notes [id] = note;
+        if (id >= 0 & id <= notes.length) {
+            notes [id] = note;
+        } else
+            System.out.println("Такой записи не существует.");
+
     }
 
     public Note[] getAllNotes () {                  //возвращает все сделанные записи
@@ -38,9 +52,6 @@ public class Notebook {
         return notesNew;
 
     }
-
-
-
 
 }
 
